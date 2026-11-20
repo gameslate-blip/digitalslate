@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """Builds the static site (English at /, Portuguese at /pt/) from one template.
 
-Run from the repo root:  python3 tools/build_site.py
+Run from the repo root:  python3 tools/build_site.py            (mirror at /digitalslate/, this repo)
+                         python3 tools/build_site.py --root-site --out ../gameslate-blip.github.io   (the main site, domain root)
+Both builds are identical except for the 404 page and the sitemap; canonical URLs always point at the domain root.
 Legal text lives in content/legal/<app>-<privacy|terms>.html (English only, kept as written).
 Everything else is defined below. The generated HTML is committed; GitHub Pages serves it as is.
 """
-import os, pathlib
+import argparse, pathlib, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://gameslate-blip.github.io/digitalslate"
+SITE = "https://gameslate-blip.github.io"   # canonical home of the site: the domain root
+OUT = ROOT                                    # where pages are written (set in main)
+PREFIX = "/digitalslate"                      # path the build is served from (used by 404.html only)
 EMAIL = "gameslate@proton.me"
 
 # --- apps -------------------------------------------------------------------------------
@@ -204,7 +208,11 @@ def home_page(lang):
   <div><div class="eyebrow">{t["dev_eyebrow"]}</div><h2>{t["dev_h2"]}</h2></div>
   <div><p>{t["dev_p"]}</p><p id="contact">{t["dev_p2"]} <a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
 </div></section>'''
-    return page(path, lang, "Digital Slate Database" + (" | Small apps for Android" if lang == "en" else " | Apps pequenos para Android"), t["site_desc"], body)
+    legacy = ""
+    if lang == "en":   # GameSlate's first website had its policy at /#privacy and /#terms; keep those links working
+        legacy = ("<script>(function(){var m={'#privacy':'gameslate/privacy/','#terms':'gameslate/terms/'}[location.hash];"
+                  "if(m)location.replace(m);})();</script>\n")
+    return page(path, lang, "Digital Slate Database" + (" | Small apps for Android" if lang == "en" else " | Apps pequenos para Android"), t["site_desc"], body, extra_head=legacy)
 
 
 def app_page(lang, app):
@@ -269,12 +277,21 @@ def legal_page(lang, app, kind):
 
 
 def write(path, html):
-    out = ROOT / path / "index.html"
+    out = OUT / path / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)
 
 
 def main():
+    global OUT, PREFIX
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=str(ROOT))
+    ap.add_argument("--root-site", action="store_true", help="building the domain-root site (no path prefix, writes sitemap.xml)")
+    args = ap.parse_args()
+    OUT = pathlib.Path(args.out).resolve()
+    PREFIX = "" if args.root_site else "/digitalslate"
+    if OUT != ROOT:
+        shutil.copytree(ROOT / "assets", OUT / "assets", dirs_exist_ok=True)
     write("", home_page("en"))
     write("pt", home_page("pt"))
     for app in ORDER:
@@ -285,18 +302,18 @@ def main():
             write(f"pt/{app}/{kind}", legal_page("pt", app, kind))
     urls = [""] + [f"{a}/" for a in ORDER] + [f"{a}/{k}/" for a in ORDER for k in ("privacy", "terms")]
     urls += ["pt/"] + [f"pt/{a}/" for a in ORDER] + [f"pt/{a}/{k}/" for a in ORDER for k in ("privacy", "terms")]
-    (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    if args.root_site: (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       + "".join(f"<url><loc>{SITE}/{u}</loc></url>\n" for u in urls) + "</urlset>\n")
     # 404 page: project sites are served under /digitalslate/, so it needs absolute paths.
-    (ROOT / "404.html").write_text(f'''<!doctype html>
+    (OUT / "404.html").write_text(f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found | Digital Slate Database</title><meta name="robots" content="noindex">
-<link rel="stylesheet" href="/digitalslate/assets/style.css"></head>
+<link rel="stylesheet" href="{PREFIX}/assets/style.css"></head>
 <body><main><div class="wrap hero"><div class="eyebrow">404</div><h1>Page not found.</h1>
 <p class="lead">That page does not exist. Pick an app instead.</p>
-<div class="actions"><a class="btn primary" href="/digitalslate/">Digital Slate Database</a><a class="btn secondary" href="/digitalslate/pt/">Português</a></div></div></main></body></html>
+<div class="actions"><a class="btn primary" href="{PREFIX}/">Digital Slate Database</a><a class="btn secondary" href="{PREFIX}/pt/">Português</a></div></div></main></body></html>
 ''')
-    print("built", len(urls), "pages")
+    print("built", len(urls), "pages into", OUT)
 
 
 if __name__ == "__main__":
