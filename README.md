@@ -6,7 +6,7 @@ Live: https://gameslate-blip.github.io/digitalslate/
 ## Pages
 - `/` and `/pt/`: studio home with the app chooser (cards with screenshots)
 - `/<app>/` and `/pt/<app>/`: app page (hero, screenshots, features)
-- `/<app>/privacy/` and `/<app>/terms/`: legal pages, English only (the Portuguese app pages link to them and say so)
+- `/<app>/privacy/` and `/<app>/terms/`: legal pages (and in Portuguese under `/pt/`, from `content/legal/pt/`)
 - `app-ads.txt`: AdMob seller file; must be served from the root of the developer-website domain (currently served from the old repo gameslate-blip/gameslate-blip.github.io; keep it there)
 - `sitemap.xml`, `404.html`, `assets/style.css`, `assets/img/` (icons + screenshots, webp)
 

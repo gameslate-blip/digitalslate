@@ -95,7 +95,7 @@ UI = {
         studio_lead="Apps Android independentes para seu próximo jogo, seu próximo livro e sua próxima música. Sem contas, sem bagunça.",
         pick_eyebrow="Escolha um app", pick_h2="Escolha uma slate.", details="Ver o app", privacy="Privacidade", terms="Termos",
         shots_h="Capturas de tela", feats_eyebrow="O que tem dentro", more_h="Mais da Digital Slate", more_eyebrow="Outros apps",
-        support="Suporte", legal_en=" (em inglês)", policy="Política de privacidade", termsfull="Termos de uso", back="Todos os apps",
+        support="Suporte", legal_en="", policy="Política de privacidade", termsfull="Termos de uso", back="Todos os apps",
         dev_eyebrow="Sobre o desenvolvedor", dev_h2="Feito por uma pessoa.",
         dev_p="A Digital Slate Database é Raphael Lira, desenvolvedor independente de Cotia, São Paulo, Brasil.",
         dev_p2="Dúvidas ou pedidos de privacidade:", tagline="Apps pequenos e úteis para Android.", rights="© 2026 Digital Slate Database. Todos os direitos reservados.",
@@ -181,7 +181,7 @@ def app_card(path, lang, app):
   <div class="top">{img(path, app + "-icon", "", 192, 192)}<div><div class="kind">{c["kind"]}</div><h3><a class="stretch" href="{rel(path, home + app + "/")}">{brand(app)}</a></h3></div></div>
   <p class="tg">{c["tagline"]}</p><p>{c["blurb"]}</p>
   <div class="peeks" aria-hidden="true">{peeks}</div>
-  <div class="links"><span class="go">{t["details"]} →</span><span class="sub"><a href="{rel(path, app + "/privacy/")}">{t["privacy"]}</a> · <a href="{rel(path, app + "/terms/")}">{t["terms"]}</a>{t["legal_en"]}</span></div>
+  <div class="links"><span class="go">{t["details"]} →</span><span class="sub"><a href="{rel(path, home + app + "/privacy/")}">{t["privacy"]}</a> · <a href="{rel(path, home + app + "/terms/")}">{t["terms"]}</a></span></div>
 </article>'''
 
 
@@ -224,8 +224,8 @@ def app_page(lang, app):
     <p class="lead">{c["lead"]}</p>
     <div class="actions">
       <!-- Add the Google Play button here once the listing is published. -->
-      <a class="btn secondary" href="{rel(path, app + "/privacy/")}">{t["policy"]}{t["legal_en"]}</a>
-      <a class="btn secondary" href="{rel(path, app + "/terms/")}">{t["termsfull"]}{t["legal_en"]}</a>
+      <a class="btn secondary" href="{rel(path, home + app + "/privacy/")}">{t["policy"]}</a>
+      <a class="btn secondary" href="{rel(path, home + app + "/terms/")}">{t["termsfull"]}</a>
     </div>
   </div>
   <div class="heroshot"><div class="icon">{img(path, app + "-icon", "", 192, 192, lazy=False)}</div></div>
@@ -247,19 +247,25 @@ def app_page(lang, app):
     return page(path, lang, f'{"".join(a["name"])} | {c["tagline"]}', c["blurb"], body, accent=a["accent"])
 
 
-def legal_page(app, kind):
+def legal_page(lang, app, kind):
     a = APPS[app]
-    path = f"{app}/{kind}/"
-    text = (ROOT / "content" / "legal" / f"{app}-{kind}.html").read_text()
+    home = "pt/" if lang == "pt" else ""
+    path = f"{home}{app}/{kind}/"
+    src = ROOT / "content" / "legal" / ("pt" if lang == "pt" else "") / f"{app}-{kind}.html"
+    text = src.read_text()
     name = "".join(a["name"])
-    title = f'{name} {"Privacy Policy" if kind == "privacy" else "Terms of use"}'
-    desc = f'{"Privacy policy" if kind == "privacy" else "Terms of use"} for the {name} Android app.'
+    if lang == "pt":
+        what = "Política de privacidade" if kind == "privacy" else "Termos de uso"
+        title, desc = f"{what} do {name}", f"{what} do app Android {name}."
+    else:
+        what = "Privacy policy" if kind == "privacy" else "Terms of use"
+        title, desc = f'{name} {"Privacy Policy" if kind == "privacy" else "Terms of use"}', f"{what} for the {name} Android app."
     body = f'''<section class="legal"><div class="wrap policy">
-<a class="crumb" href="{rel(path, app + "/")}">← {name}</a>
+<a class="crumb" href="{rel(path, home + app + "/")}">← {name}</a>
 {text}
 </div></section>'''
-    # No Portuguese legal pages (the legal text stays in English): the PT switch goes to the Portuguese app page.
-    return page(path, "en", title, desc, body, accent=a["accent"], alt_path=f"pt/{app}/")
+    other = f"{app}/{kind}/" if lang == "pt" else f"pt/{app}/{kind}/"
+    return page(path, lang, title, desc, body, accent=a["accent"], alt_path=other)
 
 
 def write(path, html):
@@ -275,9 +281,10 @@ def main():
         write(app, app_page("en", app))
         write("pt/" + app, app_page("pt", app))
         for kind in ("privacy", "terms"):
-            write(f"{app}/{kind}", legal_page(app, kind))
+            write(f"{app}/{kind}", legal_page("en", app, kind))
+            write(f"pt/{app}/{kind}", legal_page("pt", app, kind))
     urls = [""] + [f"{a}/" for a in ORDER] + [f"{a}/{k}/" for a in ORDER for k in ("privacy", "terms")]
-    urls += ["pt/"] + [f"pt/{a}/" for a in ORDER]
+    urls += ["pt/"] + [f"pt/{a}/" for a in ORDER] + [f"pt/{a}/{k}/" for a in ORDER for k in ("privacy", "terms")]
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       + "".join(f"<url><loc>{SITE}/{u}</loc></url>\n" for u in urls) + "</urlset>\n")
     # 404 page: project sites are served under /digitalslate/, so it needs absolute paths.
