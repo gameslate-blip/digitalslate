@@ -63,6 +63,9 @@
     .brand.book span { color:var(--amber); }
     body.book { --lime:#f3c46b; }
     body.book { background: radial-gradient(ellipse at 80% 0%, rgba(243,196,107,.10), transparent 35%), var(--bg); }
+    .brand.string span { color:#66c0f4; }
+    body.string { --lime:#66c0f4; }
+    body.string { background: radial-gradient(ellipse at 80% 0%, rgba(102,192,244,.12), transparent 35%), var(--bg); }
     .btn.primary { color:#10150c; }
     .breadcrumb { color:var(--muted); font-size:.9rem; padding-top:28px; }
     @media(max-width:760px){ .apps{grid-template-columns:1fr;} }
