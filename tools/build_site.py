@@ -84,7 +84,7 @@ APPS = {
                 feats=[("1 · Pick", "Style, key and tempo", "Twelve-bar blues, pop, rock, waltz, jazz and modes, major or minor, in any key. Change the tempo while it plays, or mute and mix each instrument."),
                        ("2 · Play along", "Chords, scale and shapes", "See the chord chart follow the music with a visual metronome, the home scale on the guitar neck, and how to play each chord."),
                        ("3 · Search", "Something similar to a song", "Type a song and JamSlate suggests a style, key and tempo like it, ready to play. It does not play the song: it gives you a band to play along with.")],
-                note="JamSlate does not require an account, and the band plays fully offline. The optional song search uses <a href=\"https://www.deezer.com\" target=\"_blank\" rel=\"noopener\">Deezer</a>, <a href=\"https://musicbrainz.org\" target=\"_blank\" rel=\"noopener\">MusicBrainz</a> and <a href=\"https://acousticbrainz.org\" target=\"_blank\" rel=\"noopener\">AcousticBrainz</a>; its tempos and keys are estimates. Sounds: MuseScore_General (MIT) played by FluidSynth (LGPL-2.1). JamSlate is independent and not affiliated with any of them or with any artist."),
+                note="JamSlate does not require an account, and the band plays fully offline. The optional song search uses <a href=\"https://musicbrainz.org\" target=\"_blank\" rel=\"noopener\">MusicBrainz</a> and <a href=\"https://acousticbrainz.org\" target=\"_blank\" rel=\"noopener\">AcousticBrainz</a>; its tempos and keys are estimates. Sounds: MuseScore_General (MIT) played by FluidSynth (LGPL-2.1). JamSlate is independent and not affiliated with either of them or with any artist."),
         pt=dict(kind="Música", tagline="Uma banda ao vivo no seu bolso.",
                 blurb="Uma banda de acompanhamento que toca blues, pop, rock, valsa e jazz no tom e andamento que você escolher, com cifras, escalas e posições de acorde. Em português e inglês.",
                 hero="Uma banda ao vivo<br><em>no seu bolso.</em>", eyebrow="Banda de acompanhamento para praticar e tocar junto",
@@ -92,10 +92,30 @@ APPS = {
                 feats=[("1 · Escolha", "Estilo, tom e andamento", "Blues de 12 compassos, pop, rock, valsa, jazz e modos, maior ou menor, em qualquer tom. Mude o andamento enquanto toca, ou silencie e mixe cada instrumento."),
                        ("2 · Toque junto", "Acordes, escala e posições", "Veja a sequência de acordes acompanhar a música com um metrônomo visual, a escala principal no braço da guitarra e como tocar cada acorde."),
                        ("3 · Busque", "Algo parecido com uma música", "Digite uma música e o JamSlate sugere um estilo, tom e andamento parecidos, prontos para tocar. Ele não toca a música: dá a você uma banda para tocar junto.")],
-                note="O JamSlate não exige conta, e a banda toca totalmente offline. A busca opcional de músicas usa o <a href=\"https://www.deezer.com\" target=\"_blank\" rel=\"noopener\">Deezer</a>, o <a href=\"https://musicbrainz.org\" target=\"_blank\" rel=\"noopener\">MusicBrainz</a> e o <a href=\"https://acousticbrainz.org\" target=\"_blank\" rel=\"noopener\">AcousticBrainz</a>; os andamentos e tons são estimativas. Sons: MuseScore_General (MIT) tocado pelo FluidSynth (LGPL-2.1). O JamSlate é independente e não é afiliado a nenhum deles nem a nenhum artista."),
+                note="O JamSlate não exige conta, e a banda toca totalmente offline. A busca opcional de músicas usa o <a href=\"https://musicbrainz.org\" target=\"_blank\" rel=\"noopener\">MusicBrainz</a> e o <a href=\"https://acousticbrainz.org\" target=\"_blank\" rel=\"noopener\">AcousticBrainz</a>; os andamentos e tons são estimativas. Sons: MuseScore_General (MIT) tocado pelo FluidSynth (LGPL-2.1). O JamSlate é independente e não é afiliado a nenhum deles nem a nenhum artista."),
+    ),
+    "songslate": dict(
+        name=("Song", "Slate"), accent="#ff9e7a", shots=["songslate-1", "songslate-2", "songslate-3", "songslate-4"],
+        pt_shots=["songslate-pt-1", "songslate-pt-2", "songslate-pt-3", "songslate-pt-4"],
+        en=dict(kind="Music", tagline="Write it. Play it. Record it.",
+                blurb="A songwriter's notebook with a band: type chords and words, hear them played, record your voice or guitar on top, and share the result. English and Portuguese.",
+                hero="Write it. Play it.<br><em>Record it.</em>", eyebrow="A songwriter's notebook with a band",
+                lead="Type your chords and words, press Play, and drums, bass and piano play your song with a live feel. Then record your voice or your guitar over it and share the result. Available in English and Portuguese.",
+                feats=[("1 · Write", "Chords above the words", "Intro, verse, chorus, bridge and more. Every chord line is checked as you type, and you can transpose the whole song a semitone at a time."),
+                       ("2 · Play", "A band that follows your song", "Louder in the chorus, gentler in the verse. See the current chord, a visual metronome and the line you are on; tap a line to jump there or loop a section."),
+                       ("3 · Record", "Takes, mix and share", "Record as many takes as you like over the band, line them up, mix band, voice and reverb, and send the song as an audio file or the chord sheet as a PDF.")],
+                note="SongSlate does not require an account. Your songs and recordings stay on your phone; nothing is uploaded unless you choose to share a file. The microphone is used only while you record. Sounds: MuseScore_General (MIT) played by FluidSynth (LGPL-2.1); <a href=\"../assets/jamslate-fluidsynth/\">source and licences</a>. SongSlate is independent."),
+        pt=dict(kind="Música", tagline="Escreva. Toque. Grave.",
+                blurb="Um caderno de compositor com banda: digite acordes e letra, ouça tocando, grave sua voz ou violão por cima e compartilhe o resultado. Em português e inglês.",
+                hero="Escreva. Toque.<br><em>Grave.</em>", eyebrow="Um caderno de compositor com banda",
+                lead="Digite seus acordes e a letra, aperte Tocar, e bateria, baixo e piano tocam a sua música com pegada ao vivo. Depois grave sua voz ou seu violão por cima e compartilhe o resultado. Disponível em português e inglês.",
+                feats=[("1 · Escreva", "Acordes sobre a letra", "Intro, verso, refrão, ponte e mais. Cada linha de acordes é conferida enquanto você digita, e você pode transpor a música inteira um semitom por vez."),
+                       ("2 · Toque", "Uma banda que segue a sua música", "Mais forte no refrão, mais suave no verso. Veja o acorde atual, um metrônomo visual e a linha em que você está; toque numa linha para ir até ela ou repita uma parte."),
+                       ("3 · Grave", "Versões, mixagem e compartilhar", "Grave quantas versões quiser por cima da banda, ajuste o tempo, mixe banda, voz e reverb e envie a música em áudio ou a cifra em PDF.")],
+                note="O SongSlate não exige conta. Suas músicas e gravações ficam no seu celular; nada é enviado, a menos que você escolha compartilhar um arquivo. O microfone só é usado enquanto você grava. Sons: MuseScore_General (MIT) tocado pelo FluidSynth (LGPL-2.1); <a href=\"../../assets/jamslate-fluidsynth/\">código-fonte e licenças</a>. O SongSlate é independente."),
     ),
 }
-ORDER = ["gameslate", "bookslate", "stringslate", "jamslate"]
+ORDER = ["gameslate", "bookslate", "stringslate", "jamslate", "songslate"]
 
 # --- interface texts ----------------------------------------------------------------------
 UI = {
@@ -109,7 +129,7 @@ UI = {
         dev_eyebrow="About the developer", dev_h2="Made by one person.",
         dev_p="Digital Slate Database is an independent studio making small, useful Android apps.",
         dev_p2="Questions or privacy requests:", tagline="Small, useful apps for Android.", rights="© 2026 Digital Slate Database. All rights reserved.",
-        site_desc="Digital Slate Database makes GameSlate, BookSlate, StringSlate and JamSlate: independent Android apps for games, books, guitars and jamming.",
+        site_desc="Digital Slate Database makes GameSlate, BookSlate, StringSlate, JamSlate and SongSlate: independent Android apps for games, books, guitars, jamming and songwriting.",
         facts=["No accounts", "Free with ads", "Made in Brazil"],
     ),
     "pt": dict(
@@ -122,7 +142,7 @@ UI = {
         dev_eyebrow="Sobre o desenvolvedor", dev_h2="Feito por uma pessoa.",
         dev_p="A Digital Slate Database é um estúdio independente que faz apps Android pequenos e úteis.",
         dev_p2="Dúvidas ou pedidos de privacidade:", tagline="Apps pequenos e úteis para Android.", rights="© 2026 Digital Slate Database. Todos os direitos reservados.",
-        site_desc="A Digital Slate Database faz o GameSlate, o BookSlate, o StringSlate e o JamSlate: apps Android independentes para jogos, livros, guitarra e música.",
+        site_desc="A Digital Slate Database faz o GameSlate, o BookSlate, o StringSlate, o JamSlate e o SongSlate: apps Android independentes para jogos, livros, guitarra, música e composição.",
         facts=["Sem contas", "Grátis com anúncios", "Feito no Brasil"],
     ),
 }
