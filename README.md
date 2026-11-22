@@ -1,6 +1,6 @@
 # Digital Slate Database website
 
-Static site for the GameSlate, BookSlate, StringSlate, JamSlate and SongSlate Android apps. English at `/`, Brazilian Portuguese at `/pt/`.
+Static site for the GameSlate, BookSlate, StringSlate, JamSlate, SongSlate and TrackSlate Android apps. English at `/`, Brazilian Portuguese at `/pt/`.
 Live: https://gameslate-blip.github.io/digitalslate/
 
 ## Pages

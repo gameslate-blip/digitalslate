@@ -114,15 +114,35 @@ APPS = {
                        ("3 · Grave", "Versões, mixagem e compartilhar", "Grave quantas versões quiser por cima da banda, ajuste o tempo, mixe banda, voz e reverb e envie a música em áudio ou a cifra em PDF.")],
                 note="O SongSlate não exige conta. Suas músicas e gravações ficam no seu celular; nada é enviado, a menos que você escolha compartilhar um arquivo. O microfone só é usado enquanto você grava. Sons: MuseScore_General (MIT) tocado pelo FluidSynth (LGPL-2.1); <a href=\"../../assets/jamslate-fluidsynth/\">código-fonte e licenças</a>. O SongSlate é independente."),
     ),
+    "trackslate": dict(
+        name=("Track", "Slate"), accent="#b49cff", shots=["trackslate-1", "trackslate-2", "trackslate-3", "trackslate-4"],
+        pt_shots=["trackslate-pt-1", "trackslate-pt-2", "trackslate-pt-3", "trackslate-pt-4"],
+        en=dict(kind="Music", tagline="Split a song into its instruments.",
+                blurb="Split an audio file into vocals, drums, bass and everything else, right on your phone, then mute, solo and mix the parts to practise along. English and Portuguese.",
+                hero="Split a song<br><em>into its instruments.</em>", eyebrow="Separate vocals, drums and bass on your phone",
+                lead="Pick an audio file and TrackSlate separates the vocals, drums, bass and everything else with a neural network that runs on your phone: no upload, no account. Then mute an instrument to play its part yourself, or solo one to learn it. Available in English and Portuguese.",
+                feats=[("1 · Pick", "An audio file", "MP3, M4A, FLAC, WAV and more, from your files or shared from another app. A song can take a few minutes, and the work goes on in the background."),
+                       ("2 · Separate", "Four tracks", "Vocals, drums, bass and other (guitars, keys, strings…), made on your phone. It is not perfect: a little of one instrument can stay in another."),
+                       ("3 · Practise", "Mute, solo and mix", "Turn an instrument down or off to play its part yourself, or solo it to learn it. Save the mix you hear or the four tracks as WAV files.")],
+                note="TrackSlate does not require an account, and your songs never leave your phone. Use it only with music you own or have permission to use, such as your own recordings or licensed tracks, and don't share tracks separated from music you don't have rights to. Separation uses the HT Demucs model by Alexandre Défossez and Meta AI Research (code under the MIT licence), run by ONNX Runtime (MIT). TrackSlate is independent and not affiliated with them or with any artist; it does not provide or download any music."),
+        pt=dict(kind="Música", tagline="Separe uma música em seus instrumentos.",
+                blurb="Separe um arquivo de áudio em vocais, bateria, baixo e todo o resto, no próprio celular, e depois silencie, ouça em solo e mixe as partes para praticar junto. Em português e inglês.",
+                hero="Separe uma música<br><em>em seus instrumentos.</em>", eyebrow="Separe vocais, bateria e baixo no seu celular",
+                lead="Escolha um arquivo de áudio e o TrackSlate separa os vocais, a bateria, o baixo e todo o resto com uma rede neural que roda no seu celular: sem envio, sem conta. Depois silencie um instrumento para tocar a parte dele você mesmo, ou ouça um em solo para aprendê-lo. Disponível em português e inglês.",
+                feats=[("1 · Escolha", "Um arquivo de áudio", "MP3, M4A, FLAC, WAV e outros, dos seus arquivos ou compartilhados de outro app. Uma música pode levar alguns minutos, e o trabalho continua em segundo plano."),
+                       ("2 · Separe", "Quatro faixas", "Vocais, bateria, baixo e outros (guitarras, teclas, cordas…), feitos no seu celular. Não é perfeito: um pouco de um instrumento pode ficar em outro."),
+                       ("3 · Pratique", "Silenciar, solo e mixar", "Abaixe ou desligue um instrumento para tocar a parte dele você mesmo, ou ouça-o em solo para aprender. Salve a mistura que você ouve ou as quatro faixas em WAV.")],
+                note="O TrackSlate não exige conta, e suas músicas nunca saem do seu celular. Use-o apenas com músicas que são suas ou que você tem permissão para usar, como suas próprias gravações ou faixas licenciadas, e não compartilhe faixas separadas de músicas sobre as quais você não tem direitos. A separação usa o modelo HT Demucs, de Alexandre Défossez e da Meta AI Research (código com licença MIT), rodando no ONNX Runtime (MIT). O TrackSlate é independente e não é afiliado a eles nem a nenhum artista; ele não fornece nem baixa nenhuma música."),
+    ),
 }
-ORDER = ["gameslate", "bookslate", "stringslate", "jamslate", "songslate"]
+ORDER = ["gameslate", "bookslate", "stringslate", "jamslate", "songslate", "trackslate"]
 
 # --- interface texts ----------------------------------------------------------------------
 UI = {
     "en": dict(
         lang="en", home="Home", apps="Apps", about="About", contact="Contact", other="PT", other_label="Português",
         studio_eyebrow="Digital Slate Database", studio_h1="Small apps for<br><em>what's next.</em>",
-        studio_lead="Independent Android apps for your next game, your next book, your next tune and your next jam. No accounts, no clutter.",
+        studio_lead="Independent Android apps for your next game, your next book, your next tune, your next jam and your next track. No accounts, no clutter.",
         pick_eyebrow="Choose an app", pick_h2="Pick a slate.", details="See the app", privacy="Privacy", terms="Terms",
         shots_h="Screenshots", feats_eyebrow="What's inside", more_h="More from Digital Slate", more_eyebrow="Other apps",
         support="Support", legal_en="", policy="Privacy policy", termsfull="Terms of use", back="All apps",
@@ -135,7 +155,7 @@ UI = {
     "pt": dict(
         lang="pt-BR", home="Início", apps="Apps", about="Sobre", contact="Contato", other="EN", other_label="English",
         studio_eyebrow="Digital Slate Database", studio_h1="Apps pequenos para<br><em>o que vem a seguir.</em>",
-        studio_lead="Apps Android independentes para seu próximo jogo, seu próximo livro, sua próxima música e sua próxima jam. Sem contas, sem bagunça.",
+        studio_lead="Apps Android independentes para seu próximo jogo, seu próximo livro, sua próxima música, sua próxima jam e sua próxima faixa. Sem contas, sem bagunça.",
         pick_eyebrow="Escolha um app", pick_h2="Escolha uma slate.", details="Ver o app", privacy="Privacidade", terms="Termos",
         shots_h="Capturas de tela", feats_eyebrow="O que tem dentro", more_h="Mais da Digital Slate", more_eyebrow="Outros apps",
         support="Suporte", legal_en="", policy="Política de privacidade", termsfull="Termos de uso", back="Todos os apps",
