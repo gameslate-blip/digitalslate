@@ -13,7 +13,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://gameslate-blip.github.io"   # canonical home of the site: the domain root
 OUT = ROOT                                    # where pages are written (set in main)
 PREFIX = "/digitalslate"                      # path the build is served from (used by 404.html only)
-EMAIL = "gameslate@proton.me"
+EMAIL = "digitalslate@tuta.com"
 
 # --- apps -------------------------------------------------------------------------------
 APPS = {
